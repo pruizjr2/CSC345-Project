@@ -1,1 +1,98 @@
+public class FibonacciHeapTests {
+    public static void main(String[] args) {
+        boolean allTestsPassed = true;
 
+        allTestsPassed &= testInsertion();
+        allTestsPassed &= testExtraction();
+        allTestsPassed &= testDecreaseKey();
+        allTestsPassed &= testMerge();
+
+        if (allTestsPassed) {
+            System.out.println("All tests passed successfully!");
+        } else {
+            System.out.println("Some tests failed. Please check the output for details.");
+        }
+    }
+
+    private static boolean testInsertion() {
+        System.out.println("Testing insertion...");
+        FibonacciHeap fibonacciHeap = new FibonacciHeap();
+        fibonacciHeap.insert(new FibonacciHeapNode(5));
+        fibonacciHeap.insert(new FibonacciHeapNode(3));
+        fibonacciHeap.insert(new FibonacciHeapNode(8));
+
+        // Verify the minimum after insertion
+        boolean passed = fibonacciHeap.minimum().key == 3;
+
+        if (passed) {
+            System.out.println("Insertion test passed");
+        } else {
+            System.out.println("Insertion test failed");
+        }
+
+        return passed;
+    }
+
+    private static boolean testExtraction() {
+        System.out.println("Testing extraction...");
+        FibonacciHeap fibonacciHeap = new FibonacciHeap();
+        fibonacciHeap.insert(new FibonacciHeapNode(5));
+        fibonacciHeap.insert(new FibonacciHeapNode(3));
+        fibonacciHeap.insert(new FibonacciHeapNode(8));
+        FibonacciHeapNode minNode = fibonacciHeap.extractMin();
+
+        // Verify the extracted minimum node's key
+        boolean passed = minNode.key == 3;
+
+        if (passed) {
+            System.out.println("Extraction test passed");
+        } else {
+            System.out.println("Extraction test failed");
+        }
+
+        return passed;
+    }
+
+    private static boolean testDecreaseKey() {
+        System.out.println("Testing decrease key...");
+        FibonacciHeap fibonacciHeap = new FibonacciHeap();
+        FibonacciHeapNode node1 = new FibonacciHeapNode(5);
+        fibonacciHeap.insert(node1);
+        fibonacciHeap.insert(new FibonacciHeapNode(3));
+        fibonacciHeap.insert(new FibonacciHeapNode(8));
+
+        fibonacciHeap.decreaseKey(node1, 2);
+
+        // Verify the minimum after decreasing key
+        boolean passed = fibonacciHeap.minimum().key == 2;
+
+        if (passed) {
+            System.out.println("Decrease key test passed");
+        } else {
+            System.out.println("Decrease key test failed");
+        }
+
+        return passed;
+    }
+
+    private static boolean testMerge() {
+        System.out.println("Testing merge...");
+        FibonacciHeap fibonacciHeap1 = new FibonacciHeap();
+        fibonacciHeap1.insert(new FibonacciHeapNode(5));
+        fibonacciHeap1.insert(new FibonacciHeapNode(3));
+        FibonacciHeap fibonacciHeap2 = new FibonacciHeap();
+        fibonacciHeap2.insert(new FibonacciHeapNode(8));
+        fibonacciHeap1.merge(fibonacciHeap2);
+
+        // Verify the minimum after merging
+        boolean passed = fibonacciHeap1.minimum().key == 3;
+
+        if (passed) {
+            System.out.println("Merge test passed");
+        } else {
+            System.out.println("Merge test failed");
+        }
+
+        return passed;
+    }
+}
