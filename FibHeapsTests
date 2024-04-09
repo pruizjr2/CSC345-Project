@@ -8,6 +8,10 @@ public class FibonacciHeapTests {
         testDecreaseKey();
         testMerge();
         testDeletion();
+        testIncreaseKey();
+        testDecreaseKeyWithParent();
+        testDecreaseKeyWithoutParent();
+        testEmptyHeapExtractMin();
     }
 
     private static void testInsertion() {
@@ -99,4 +103,61 @@ public class FibonacciHeapTests {
 
         System.out.println("Deletion test passed.");
     }
+
+    private static void testIncreaseKey() {
+        FibonacciHeap heap = new FibonacciHeap();
+        FibonacciHeapNode node1 = new FibonacciHeapNode(5);
+        FibonacciHeapNode node2 = new FibonacciHeapNode(3);
+        FibonacciHeapNode node3 = new FibonacciHeapNode(8);
+        heap.insert(node1);
+        heap.insert(node2);
+        heap.insert(node3);
+    
+        // Increase the key of a node
+        heap.increaseKey(node2, 6);
+        assert heap.minimum() == node1 : "Increase key test failed";
+    
+        System.out.println("Increase key test passed.");
+    }
+    
+    private static void testDecreaseKeyWithParent() {
+        FibonacciHeap heap = new FibonacciHeap();
+        FibonacciHeapNode node1 = new FibonacciHeapNode(5);
+        FibonacciHeapNode node2 = new FibonacciHeapNode(3);
+        FibonacciHeapNode node3 = new FibonacciHeapNode(8);
+        heap.insert(node1);
+        heap.insert(node2);
+        heap.insert(node3);
+    
+        // Decrease the key of a node with a parent
+        heap.decreaseKey(node3, 2);
+        assert heap.minimum() == node3 : "Decrease key with parent test failed";
+    
+        System.out.println("Decrease key with parent test passed.");
+    }
+    
+    private static void testDecreaseKeyWithoutParent() {
+        FibonacciHeap heap = new FibonacciHeap();
+        FibonacciHeapNode node1 = new FibonacciHeapNode(5);
+        FibonacciHeapNode node2 = new FibonacciHeapNode(3);
+        heap.insert(node1);
+        heap.insert(node2);
+    
+        // Decrease the key of a node without a parent
+        heap.decreaseKey(node2, 2);
+        assert heap.minimum() == node2 : "Decrease key without parent test failed";
+    
+        System.out.println("Decrease key without parent test passed.");
+    }
+    
+    private static void testEmptyHeapExtractMin() {
+        FibonacciHeap heap = new FibonacciHeap();
+    
+        // Attempt to extract min from an empty heap
+        FibonacciHeapNode min = heap.extractMin();
+        assert min == null : "Empty heap extract min test failed";
+    
+        System.out.println("Empty heap extract min test passed.");
+    }
+    
 }
