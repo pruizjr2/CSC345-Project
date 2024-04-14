@@ -1,5 +1,3 @@
-package org.example.fibonachyheap.project;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -207,7 +205,7 @@ public class FibonacciHeap {
         increaseKey(node, node.key + 1);
     }
 
-    private void decreaseKey(FibonacciHeapNode node, int newKey) {
+    public void decreaseKey(FibonacciHeapNode node, int newKey) {
         if (node != null && newKey < node.key) {
             node.key = newKey;
             FibonacciHeapNode parent = node.parent;
@@ -223,7 +221,7 @@ public class FibonacciHeap {
         }
     }
 
-    private void increaseKey(FibonacciHeapNode node, int newKey) {
+    public void increaseKey(FibonacciHeapNode node, int newKey) {
         if (node != null && newKey > node.key) {
             node.key = newKey;
             FibonacciHeapNode child = node.child;
